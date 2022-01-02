@@ -18,6 +18,7 @@
 
 - シンプルリダイレクト設定値の保存先
     - site_configs テーブル内の name値が simple_redirection 内にjson形式で保存します。
+	- プラグインの無効化・削除の際は、手動でデータを削除してください。残っていても本体動作に問題はありません。
 
 ### Logs
 
@@ -49,7 +50,7 @@
 開発ブランチの規則は以下です。
 
 - main
-- dev・・・開発版 (Pull Request Target)
+- dev-4・・・開発版 (Pull Request Target)
 
 ### NoDevelopmentPlan
 
