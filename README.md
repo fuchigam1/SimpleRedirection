@@ -43,7 +43,7 @@
 
 | Version | baserCMS | admin-second | admin-thrid |
 |:--|:--|:--|:--|
-| 1.0.0 | 4.5.4 | 未対応 | 対応 |
+| 1.0.0 | 4.5.4 | 対応 | 対応 |
 
 ### Development Rules
 

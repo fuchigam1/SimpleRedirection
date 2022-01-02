@@ -20,7 +20,7 @@ $this->BcListTable->setColumnNumber(3);
 					<br>
 					HTTPステータスコード&nbsp;/&nbsp;利用状態
 				</th>
-				<th class="bca-table-listup__thead-th">
+				<th class="bca-table-listup__thead-th" style="min-width: 170px;">
 					説明文
 					<br>
 					削除指定
@@ -37,7 +37,7 @@ $this->BcListTable->setColumnNumber(3);
 				<td class="col-head bca-table-listup__tbody-td">
 					<?php
 						$inputTextOption = [
-							'type' => 'text', 'size' => 80,
+							'type' => 'text', 'size' => 70,
 							'class' => implode(' ', ['bca-textbox__input', 'full-counter']),
 							'placeholder' => '必須入力',
 						];
@@ -51,7 +51,7 @@ $this->BcListTable->setColumnNumber(3);
 
 					<?php
 						$inputTextOption = [
-							'type' => 'text', 'size' => 80,
+							'type' => 'text', 'size' => 70,
 							'class' => implode(' ', ['bca-textbox__input', 'full-counter']),
 							'placeholder' => '必須入力',
 						];
@@ -62,7 +62,7 @@ $this->BcListTable->setColumnNumber(3);
 					<?php echo $this->BcForm->input($i .'.SimpleRedirection.target', $inputTextOption) ?>
 					<?php echo $this->BcForm->error($i .'.SimpleRedirection.target') ?>
 
-					<? // エラーメッセージの表示 ?>
+					<?php // エラーメッセージの表示 ?>
 					<?php if (Hash::check($data, 'SimpleRedirection.error')): ?>
 						<div class="error-message"><?php echo implode(' ', Hash::get($data, 'SimpleRedirection.error')); ?></div>
 					<?php else: ?>
@@ -79,8 +79,8 @@ $this->BcListTable->setColumnNumber(3);
 				</td>
 				<td class="col-head bca-table-listup__tbody-td">
 					<?php echo $this->BcForm->input($i .'.SimpleRedirection.description', [
-						'type' => 'textarea', 'cols' => 30, 'rows' => 1,
-						'style' => 'width: 96%;'
+						'type' => 'textarea', 'cols' => 30, 'rows' => 2,
+						'style' => 'width: 92%;',
 					]) ?>
 					<br>
 					<small>※設定の理由や目的等を自由入力（省略可）</small>
@@ -167,9 +167,9 @@ window.addEventListener('DOMContentLoaded', function() {
 <tbody>
 	<tr id="Row{{$}}">
 		<td class="col-head bca-table-listup__tbody-td">
-			<span class="bca-textbox"><input name="data[{{$}}][SimpleRedirection][source]" size="80" class="bca-textbox__input full-counter" type="text" id="{{$}}SimpleRedirectionSource" placeholder="必須入力"></span>
+			<span class="bca-textbox"><input name="data[{{$}}][SimpleRedirection][source]" size="70" class="bca-textbox__input full-counter" type="text" id="{{$}}SimpleRedirectionSource" placeholder="必須入力"></span>
 			<br>
-			<span class="bca-textbox"><input name="data[{{$}}][SimpleRedirection][target]" size="80" class="bca-textbox__input full-counter" type="text" id="{{$}}SimpleRedirectionTarget" placeholder="必須入力"></span>
+			<span class="bca-textbox"><input name="data[{{$}}][SimpleRedirection][target]" size="70" class="bca-textbox__input full-counter" type="text" id="{{$}}SimpleRedirectionTarget" placeholder="必須入力"></span>
 			<br>
 			<small>[HTTPステータスコード]</small>
 			<span class="bca-select"><select name="data[{{$}}][SimpleRedirection][status_code]" class="bca-select__select" id="{{$}}SimpleRedirectionStatusCode">
@@ -183,7 +183,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		</td>
 		<td class="col-head bca-table-listup__tbody-td">
 			<span class="bca-textarea">
-				<textarea name="data[{{$}}][SimpleRedirection][description]" cols="30" rows="1" style="width: 96%;" class="bca-textarea__textarea" id="{{$}}SimpleRedirectionDescription"></textarea>
+				<textarea name="data[{{$}}][SimpleRedirection][description]" cols="30" rows="2" style="width: 92%;" class="bca-textarea__textarea" id="{{$}}SimpleRedirectionDescription"></textarea>
 			</span>
 			<br>
 			<small>※設定の理由や目的等を自由入力（省略可）</small>
