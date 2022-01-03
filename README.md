@@ -1,6 +1,6 @@
 # SimpleRedirection
 
-リダイレクト機能を追加できる[baserCMS](https://basercms.net/)専用のプラグインです。
+シンプルなリダイレクト機能を追加できる[baserCMS](https://basercms.net/)専用のプラグインです。
 
 
 ## Setup, Installation
@@ -30,7 +30,7 @@
 
 - シンプルリダイレクト設定値の保存先
     - site_configs テーブル内の name値が simple_redirection 内にjson形式で保存します。
-    - プラグインの無効化・削除の際は、手動でデータを削除してください。残っていても本体動作に問題はありません。
+    - プラグインの無効化・削除の際は、手動でデータを削除してください。残っていても本体動作に支障はありません。
 
 ```sql
 DELETE FROM `mysite_site_configs`
