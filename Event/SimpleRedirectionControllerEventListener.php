@@ -21,6 +21,12 @@ class SimpleRedirectionControllerEventListener extends BcControllerEventListener
 		}
 
 		$Controller = $event->subject();
+
+		// ajax系処理はスルー。ajax_get_token避け
+		if ($Controller->request->is('ajax')) {
+			return;
+		}
+
 		if ($Controller->request->is('get')) {
 			$SiteConfigModel = ClassRegistry::init('SiteConfig');
 			$data = $SiteConfigModel->findByName('simple_redirection');
