@@ -59,8 +59,13 @@ class SimpleRedirectionsController extends AppController {
 
 				$errorMessage = $this->SimpleRedirectionModel->validationErrors;
 				$errorMessage[] = '入力エラーです。内容を修正してください。';
+				// BcMessageを持たないバージョンに対応
+				if (in_array('BcMessage', $this->components, true)) {
+					$this->BcMessage->setError(implode(' ', $errorMessage));
+				} else {
+					$this->setMessage(implode(' ', $errorMessage), true);
+				}
 
-				$this->BcMessage->setError(implode(' ', $errorMessage));
 				$this->render('index');
 				return;
 			} else {
@@ -69,7 +74,12 @@ class SimpleRedirectionsController extends AppController {
 					$errorList['json_error'] = json_last_error_msg();
 					$message = '保存できない文字列が含まれています。内容を修正してください。';
 					$message .= $errorList['json_error'];
-					$this->BcMessage->setError($message);
+					// BcMessageを持たないバージョンに対応
+					if (in_array('BcMessage', $this->components, true)) {
+						$this->BcMessage->setError($message);
+					} else {
+						$this->setMessage($message, true);
+					}
 
 					CakeLog::write(LOG_SIMPLE_REDIRECTION, $errorList['json_error']);
 					CakeLog::write(LOG_SIMPLE_REDIRECTION, print_r($this->request->data, true));
@@ -79,15 +89,28 @@ class SimpleRedirectionsController extends AppController {
 				}
 
 				if ($this->SiteConfig->saveKeyValue(['simple_redirection' => $encoded])) {
+					// BcMessageを持たないバージョンに対応
+					if (in_array('BcMessage', $this->components, true)) {
+						$this->BcMessage->setSuccess('シンプルリダイレクト設定を保存しました。');
+					} else {
+						$this->setMessage('シンプルリダイレクト設定を保存しました。');
+					}
+
 					// 保存時のスナップショットとしてログに取っておく
 					CakeLog::write(LOG_SIMPLE_REDIRECTION, '[SAVE SUCCESS]');
 					CakeLog::write(LOG_SIMPLE_REDIRECTION, $encoded, true);
-					$this->BcMessage->setSuccess('シンプルリダイレクト設定を保存しました。');
+
 					clearAllCache();
 				} else {
+					// BcMessageを持たないバージョンに対応
+					if (in_array('BcMessage', $this->components, true)) {
+						$this->BcMessage->setError('シンプルリダイレクト設定の保存に失敗しました。');
+					} else {
+						$this->setMessage('シンプルリダイレクト設定の保存に失敗しました。', true);
+					}
+
 					CakeLog::write(LOG_SIMPLE_REDIRECTION, '[SAVE FALSE]');
 					CakeLog::write(LOG_SIMPLE_REDIRECTION, print_r($this->request->data, true));
-					$this->BcMessage->setError('シンプルリダイレクト設定の保存に失敗しました。');
 				}
 
 				$this->redirect(['action' => 'index']);
@@ -100,10 +123,15 @@ class SimpleRedirectionsController extends AppController {
 					$errorList['json_error'] = json_last_error_msg();
 					$message = 'フォーム用の文字列に変換できない文字列が含まれています。内容を修正してください。';
 					$message .= $errorList['json_error'];
-					$this->BcMessage->setError($message);
+					// BcMessageを持たないバージョンに対応
+					if (in_array('BcMessage', $this->components, true)) {
+						$this->BcMessage->setError($message);
+					} else {
+						$this->setMessage($message, true);
+					}
 
-					CakeLog::write(LOG_EXAMPLE_PLUGIN, $errorList['json_error']);
-					CakeLog::write(LOG_EXAMPLE_PLUGIN, $decoded);
+					CakeLog::write(LOG_SIMPLE_REDIRECTION, $errorList['json_error']);
+					CakeLog::write(LOG_SIMPLE_REDIRECTION, $decoded);
 				} else {
 					$this->request->data = $decoded;
 				}
