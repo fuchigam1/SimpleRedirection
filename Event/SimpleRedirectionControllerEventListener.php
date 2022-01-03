@@ -22,9 +22,19 @@ class SimpleRedirectionControllerEventListener extends BcControllerEventListener
 
 		$Controller = $event->subject();
 
-		// ajax系処理はスルー。ajax_get_token避け
+		// ajax処理はスルー。例: ajax_get_token
 		if ($Controller->request->is('ajax')) {
 			return;
+		}
+		// requestActionはスルー。例: /blog/blog/get_recent_entries/〜
+		if (!empty($Controller->request->params['requested'])) {
+			return;
+		}
+		// files系アクセスはスルー。例: アイキャッチ画像
+		if (Hash::check($Controller->request->params, 'controller')) {
+			if (Hash::get($Controller->request->params, 'controller') === 'files') {
+				return;
+			}
 		}
 
 		if ($Controller->request->is('get')) {
